@@ -4,12 +4,19 @@ This is a boilerplate repository for writing and compiling LaTeX documents local
 
 To use this boilerplate, clone or download a copy of this repo, change LICENSE and README, rename whichever files finding you fancy and update references to them in other files.
 
-## Compiling
+## Getting started
 
-Requires docker and docker-compose.
+Make sure you have docker and docker-compose installed.
+
+Before the first time you compile, you have to build the docker container, with the following command. It downloads a 2.5 GiB base image and might take some time.
 
 ```sh
 docker-compose build
+```
+
+Then, every time you want to compile, run
+
+```sh
 docker-compose up
 ```
 
@@ -25,9 +32,13 @@ All direct compilation output, including logs, are stored in [`report_output/`](
 
 ## VS Code integration
 
-The directory [`.vscode/`](.vscode/) contains some code for vscode integration. [`tasks.json`](.vscode/tasks.json) define vscode tasks for building the docker container and compiling the LaTeX code. [`settings.json`](.vscode/settings.json) enables automatic compiling LaTeX when you save a file in the [`report/`](report/) directory, but this also requires the extension "Run on Save" by emeraldwalk.
+The repo has VS Code integration with the following features:
 
-[Report.pdf](Report.pdf) is the project report. It's source code is located in the directory 
+- Automatic compile on file save
+  - Requires extension "Run on Save" by emeraldwalk.
+- VS Code tasks
+  - "Build report container"
+  - "Compile report"
 
 ## Known issues
 
