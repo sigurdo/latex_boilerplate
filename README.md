@@ -1,24 +1,18 @@
 # Docker LaTeX compilation boilerplate repo
 
-This is a boilerplate repository for writing and compiling LaTeX documents locally with VS Code and Docker. Based on the `blang/latex:ubuntu` docker image.
+This is a boilerplate repository for writing and compiling LaTeX documents locally with VS Code and Docker. Uses the `blang/latex:ubuntu` docker image.
 
 To use this boilerplate, clone or download a copy of this repo, change LICENSE and README, rename whichever files finding you fancy and update references to them in other files.
 
-## Getting started
+## Compiling
 
 Make sure you have docker and docker-compose installed.
 
-Before the first time you compile, you have to build the docker container, with the following command. It downloads a 2.5 GiB base image and might take some time.
-
 ```sh
-docker-compose build
+$ docker-compose up
 ```
 
-Then, every time you want to compile, run
-
-```sh
-docker-compose up
-```
+The first time you do this, you have to download a 2.5 GiB docker image, which might take some time. After that, Docker should cache the image on your computer, and it should be a lot faster to compile afterwards.
 
 ## Source code
 
