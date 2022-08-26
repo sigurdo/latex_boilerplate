@@ -1,0 +1,10 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "report/.*",
+                "cmd": "docker-compose up"
+            }
+        ]
+    },
+}

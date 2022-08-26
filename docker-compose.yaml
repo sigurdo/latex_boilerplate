@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  report:
+    build: .
+    volumes:
+      - ./report:/data/report:Z
+      - ./report_output:/data/output:Z
+      - ./Report.pdf:/data/output/main.pdf:Z
+    working_dir: /data/report
+    command: pdflatex -shell-escape -output-dir /data/output main.tex
