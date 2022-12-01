@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \input{packages}
+\input{code_styles}
 
 \begin{document}
 
@@ -12,6 +13,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sem ex, porttitor
     \includesvg[width=\textwidth]{figures/plots/sin_x.svg}
 \end{figure}
 
+\lstset{language=Python3, style=pythonstyle}
 \lstinputlisting{source_code/implementation/main.py}
 
 \bibliographystyle{apalike}
