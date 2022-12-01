@@ -12,5 +12,8 @@
         ]
     },
     "latex-workshop.latex.autoBuild.run": "never",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "workbench.editorAssociations": {
+        "*.svg": "svgPreviewer.customEditor"
+    }
 }
