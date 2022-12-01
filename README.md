@@ -22,13 +22,13 @@ The result is stored as [`Report.pdf`](Report.pdf).
 
 All LaTeX source code should be located in the `report/` directory. The main/index/entry point LaTeX file must have the path `report/main.tex`, project source code will automatically be copied to `report/source_code/`, besides that you can use any template and organize everything exactly as you want.
 
-## Project source code organization
+## Project source code
 
 This repository is intended as a boilerplate also for organizing all source code related to a project resulting in a report. This boilerplate targets to separate the actual source code of the project from the report, but still make it easily accessible within the report source code. This is done by simply copying the entire `source_code` directory to a subdirectory `source_code` of the `report_output` directory right before report compilation.
 
 You can therefore simply organize all your project source code exactly as you want inside the `source_code` directory.
 
-## Output
+## Latex compilation output
 
 The final PDF is stored as [`Report.pdf`](Report.pdf). If you want to rename this, remember to also rename the reference to it in [`docker-compose.yaml`](docker-compose.yaml).
 
