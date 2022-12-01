@@ -2,10 +2,13 @@ version: "3"
 
 services:
   report:
-    image: blang/latex:ubuntu
+    build: .
+    image: sigurdht/compile-latex
     volumes:
       - ./report:/data/report:Z
-      - ./report_output:/data/output:Z
-      - ./Report.pdf:/data/output/main.pdf:Z
-    working_dir: /data/report
-    command: pdflatex -shell-escape -output-dir /data/output main.tex
+      - ./report_output:/data/report_output:Z
+      - ./source_code:/data/source_code:Z
+      - ./Report.pdf:/data/Report.pdf:Z
+      - ./compile.sh:/data/compile.sh:Z
+    working_dir: /data
+    command: ./compile.sh

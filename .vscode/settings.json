@@ -4,7 +4,13 @@
             {
                 "match": "report/.*",
                 "cmd": "docker-compose up"
+            },
+            {
+                "match": "source_code/plot/.*.py",
+                "cmd": "python ${file}"
             }
         ]
     },
+    "latex-workshop.latex.autoBuild.run": "never",
+    "editor.wordWrap": "on"
 }

@@ -12,7 +12,7 @@ Make sure you have docker and docker-compose installed.
 $ docker-compose up
 ```
 
-The first time you do this, you have to download a 2.5 GiB docker image, which might take some time. After that, Docker should cache the image on your computer, and it should be a lot faster to compile afterwards.
+The first time you do this, you have to download a 5 GiB docker image, which might take some time. After that, Docker should cache the image on your computer, and it should be a lot faster to compile afterwards.
 
 ## Source code
 
@@ -30,14 +30,10 @@ The repo has VS Code integration with the following features:
 
 - Automatic compile on file save
   - Requires extension "Run on Save" by emeraldwalk.
+- Matplotlib integration
+  - Store python files for plotting in `source_code/plot/`.
+  - These are automatically executed on save with the extension "Run on Save" by emeraldwalk.
+  - Yes, it would be a lot cleaner to do this through docker in some way, but I would want you to have control of your plotting environment yourself. A separate docker container is a fantastic approach. I also anyways suggest committing the plot output to the repo. It makes reading the repository a lot easier.
 - VS Code tasks
   - "Build report container"
   - "Compile report"
-
-## Known issues
-
-- When using `minted`, you have to provide the output directory explicitly, like this
-  ```latex
-  \usepackage[outputdir=../output]{minted}
-  ```
-  - This is because the source code is compiled with `-output-dir` set to another directory than the source code directory, and apparently, minted doesn't get this information automatically. We could just compile everything in the same directory, but I think it's very messy to get all the outputs in the source code directory.
