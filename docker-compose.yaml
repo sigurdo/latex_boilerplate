@@ -5,10 +5,9 @@ services:
     build: .
     image: sigurdht/compile-latex
     volumes:
-      - ./report:/data/report:Z
-      - ./report_output:/data/report_output:Z
-      - ./source_code:/data/source_code:Z
-      - ./Report.pdf:/data/Report.pdf:Z
-      - ./compile.sh:/data/compile.sh:Z
-    working_dir: /data
-    command: ./compile.sh
+      - ./report:/data/report:ro
+      - ./report_output:/data/report_output:rw
+      - ./source_code:/data/source_code:ro
+      - ./Report.pdf:/data/Report.pdf:rw
+      - ./compile.sh:/data/compile.sh:ro
+    command: /data/compile.sh
