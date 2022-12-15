@@ -1,6 +1,6 @@
 # Docker LaTeX compilation boilerplate repo
 
-This is a boilerplate repository for writing and compiling LaTeX documents locally with VS Code and Docker. Based on the [`blang/latex:ctanfull`](https://hub.docker.com/r/blang/latex/#!) docker image.
+This is a boilerplate repository for writing and compiling LaTeX documents locally with VS Code and Docker.
 
 To use this boilerplate, clone or download a copy of this repo, change LICENSE and README, rename whichever files finding you fancy and update references to them in other files.
 
@@ -8,13 +8,19 @@ To use this boilerplate, clone or download a copy of this repo, change LICENSE a
 
 Make sure you have docker and docker-compose installed.
 
-Compile latex to PDF with:
+Full compile:
+
+```sh
+$ docker-compose up plot && docker-compose up report
+```
+
+Run loop that automatically recompiles on changes:
 
 ```sh
 $ docker-compose up
 ```
 
-The first time you do this, you have to download a 5 GiB docker image, which might take some time. After that, Docker should cache the image on your computer, and it should be a lot faster to compile afterwards.
+The first time compile, you have to download a 5 GiB docker image, which might take some time. After that, Docker should cache the image on your computer, and it should be a lot faster to compile afterwards.
 
 The result is stored as [`Report.pdf`](Report.pdf).
 
@@ -38,13 +44,15 @@ All direct compilation output, including logs, are stored in [`report_output/`](
 
 The repo has VS Code integration with the following features:
 
-- Automatic compile latex on file save
-  - Requires extension "Run on Save" by emeraldwalk.
-- Matplotlib integration
-  - Store python files for plotting in `source_code/plot/`.
-  - These plot scripts should use `plt.savefig()` to store plots to some location in the `report/` directory, preferably `report/figures/plots/`. See [`plot.py`](source_code/plot/plot.py) for an example.
-  - These are automatically executed on save with the extension "Run on Save" by emeraldwalk.
-  - Yes, it would be a lot cleaner to do this through docker in some way, but I would want you to have control of your plotting environment yourself. A separate docker container is a fantastic approach. I also anyways suggest committing the plot output to the repo. It makes reading the repository a lot easier.
+- VS Code settings
+  - Disable `latex-workshop.latex.autoBuild.run`
+  - Enable word wrap by default
+  - Set default SVG viewer to `svgPreviewer.customEditor`
 - VS Code tasks
-  - "Build report container"
-  - "Compile report"
+  - "Build docker containers"
+    - Builds docker containers.
+  - "Compile"
+    - Compiles entire report.
+  - "Reompile loop"
+    - Starts automatic recompile on changes loop.
+    - Runs automatically when you open the workspace.

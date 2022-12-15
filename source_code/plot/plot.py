@@ -25,6 +25,7 @@ def plot_all(
     ]:
         function()
         plt.savefig(os.path.join(output_dir, filename))
+        print("Saved", filename)
         plt.clf()
 
 if __name__ == "__main__":

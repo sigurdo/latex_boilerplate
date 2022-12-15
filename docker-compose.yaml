@@ -1,13 +1,39 @@
 version: "3"
 
 services:
-  report:
-    build: .
-    image: sigurdht/compile-latex
-    volumes:
-      - ./report:/data/report:ro
-      - ./report_output:/data/report_output:rw
-      - ./source_code:/data/source_code:ro
-      - ./Report.pdf:/data/Report.pdf:rw
-      - ./compile.sh:/data/compile.sh:ro
-    command: /data/compile.sh
+    report_loop:
+        build: .
+        image: sigurdht/compile-latex
+        volumes:
+            - ./report:/data/report:ro
+            - ./report_output:/data/report_output:rw
+            - ./source_code:/data/source_code:ro
+            - ./Report.pdf:/data/Report.pdf:rw
+            - ./filechange_loop.sh:/data/filechange_loop.sh:ro
+            - ./compile.sh:/data/compile.sh:ro
+        command: /data/filechange_loop.sh report ./compile.sh
+
+    plot_loop:
+        build:
+            context: .
+            dockerfile: ./Dockerfile.matplotlib
+        image: sigurdht/matplotlib
+        volumes:
+            - ./source_code/plot:/app/plot_code:ro
+            - ./report/figures/plots:/app/plots:rw
+            - ./filechange_loop.sh:/app/filechange_loop.sh:ro
+            - ./plot.sh:/app/plot.sh:ro
+        working_dir: /app
+        command: /app/filechange_loop.sh plot_code ./plot.sh
+
+    plot:
+        extends: plot_loop
+        command: ./plot.sh
+        profiles:
+            - plot
+
+    report:
+        extends: report_loop
+        command: ./compile.sh
+        profiles:
+            - report
