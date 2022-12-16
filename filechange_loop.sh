@@ -6,7 +6,7 @@ watch_path=$1
 shift
 cmd=$@
 
-export last_executed_time=0
+last_executed_time=0
 
 while [ 1 ]
 do
@@ -14,7 +14,7 @@ do
     last_changed_time=$(date -r $last_changed_file +"%s%9N")
     if [ $last_changed_time -gt $last_executed_time ]
     then
-        export last_executed_time=$(date +"%s%9N")
+        last_executed_time=$(date +"%s%9N")
         $cmd
     else
         sleep 0.1
