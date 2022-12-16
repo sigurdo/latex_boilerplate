@@ -2,18 +2,21 @@
 # set -e
 # cd $(dirname $0)/
 
-$2
+watch_path=$1
+shift
+cmd=$@
+
+export last_executed_time=0
 
 while [ 1 ]
 do
-    last_changed_file=$(find $1 -type f -printf "%T@ %p\n" | sort -n | cut -d' ' -f 2- | tail -n 1)
-    seconds_since_change=$(($(date +%s) - $(date -r $last_changed_file +%s)))
-    if [ $seconds_since_change -lt 3 ]
+    last_changed_file=$(find $watch_path -type f -printf "%T@ %p\n" | sort -n | cut -d' ' -f 2- | tail -n 1)
+    last_changed_time=$(date -r $last_changed_file +"%s%9N")
+    if [ $last_changed_time -gt $last_executed_time ]
     then
-        $2 &
-        sleep 3 &
-        wait
+        export last_executed_time=$(date +"%s%9N")
+        $cmd
     else
-        sleep 1
+        sleep 0.1
     fi
 done
