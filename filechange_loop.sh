@@ -7,6 +7,7 @@ shift
 cmd=$@
 
 last_executed_time=0
+process_id=0
 
 while [ 1 ]
 do
@@ -15,8 +16,8 @@ do
     if [ $last_changed_time -gt $last_executed_time ]
     then
         last_executed_time=$(date +"%s%9N")
-        $cmd
-    else
-        sleep 0.1
+        kill $process_id
+        $cmd & process_id=$!
     fi
+    sleep 0.1
 done
